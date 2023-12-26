@@ -33,3 +33,14 @@ jobs:
         with:
           name: dist-files
           path: dist
+  deploy:
+    needs: [build]
+    name: Upload downlaod fils into docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-files
+      - name: Show the downlaod contents
+        run: ls
