@@ -43,4 +43,4 @@ jobs:
         with:
           name: dist-files
       - name: Show the downlaod contents
-        run: ~
+        run: ls -R docs/
