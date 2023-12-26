@@ -28,8 +28,3 @@ jobs:
         run: npm ci
       - name: Execute build command
         run: npm run build
-      - name: Upload artifacts
-        uses: actions/upload-artifacts@v4
-        with:
-          name: dist-files
-          path: dist
