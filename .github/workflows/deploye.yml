@@ -21,6 +21,8 @@ jobs:
     needs: [lint]
     name: Performing Project Build
     runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{steps.published.outputs.script-file}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,18 +30,27 @@ jobs:
         run: npm ci
       - name: Execute build command
         run: npm run build
+      - name: Exposed file name for another job
+        id: published
+        run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT ';'
+      # run: find dist/assets/*.js -type f -execdir echo '::set-output name=script-file::{}' ';'
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: dist-files
           path: dist
+
+          #below line of code represent multi line input
+          # path: |
+          #     dist
+          #     package.json
   deploy:
     needs: [build]
     name: Upload downlaod fils into docs
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Output file-name
+        run: echo "${{needs.build.outputs.script-file}}"
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
