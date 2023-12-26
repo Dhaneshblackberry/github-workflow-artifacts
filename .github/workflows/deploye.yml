@@ -57,16 +57,16 @@ jobs:
       # path: |
       #     dist
       #     package.json
-  deploy:
-    needs: [build]
-    name: Upload downlaod fils into docs
-    runs-on: ubuntu-latest
-    steps:
-      - name: Output file-name
-        run: echo "${{needs.build.outputs.script-file}}"
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-files
-      - name: Show the downlaod contents
-        run: ls -R
+  # deploy:
+  #   needs: [build]
+  #   name: Upload downlaod fils into docs
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Output file-name
+  #       run: echo "${{needs.build.outputs.script-file}}"
+  #     - name: Download Artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: dist-files
+  #     - name: Show the downlaod contents
+  #       run: ls -R
