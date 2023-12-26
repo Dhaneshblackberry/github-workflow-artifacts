@@ -17,9 +17,9 @@ jobs:
         run: npm ci
       - name: Execute lint command
         run: npm run lint
-  deploy:
+  build:
     needs: [lint]
-    name: Performing Project Deployment
+    name: Performing Project Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,3 +28,8 @@ jobs:
         run: npm ci
       - name: Execute build command
         run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifacts@v4
+        with:
+          name: dist-files
+          path: dist
