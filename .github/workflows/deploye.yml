@@ -43,4 +43,4 @@ jobs:
         with:
           name: dist-files
       - name: Show the downlaod contents
-        run: ls
+        run: ls echo "{{~}}"
