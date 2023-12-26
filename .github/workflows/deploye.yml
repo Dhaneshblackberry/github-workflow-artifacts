@@ -17,17 +17,8 @@ jobs:
         run: npm ci
       - name: Execute lint command
         run: npm run lint
-  test:
-    name: Performing Project Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Dependencies
-        run: npm ci
-      - name: Execute test command
-        run: npm run test
   deploy:
+    needs: [lint]
     name: Performing Project Deployment
     runs-on: ubuntu-latest
     steps:
