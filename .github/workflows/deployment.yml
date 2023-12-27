@@ -47,10 +47,11 @@ jobs:
         run: npm run build
       - name: Commit and push changes (optional)
         run: |
-          git config --global user.name "dhanesh"
-          git config --global user.email "dhanesh.kumar@xoriant.com"
+          PUSHED_EMAIL=$(git log -1 --pretty=format:'%ae')
+          git config --global user.name "${{ github.actor }}"
+          git config --local user.email "$PUSHED_EMAIL"
           git add docs
-          git commit -m "Update Storybook build"
+          git commit -m "Update Storybook build ${{ github.run_id }}-$(date +'%Y-%m-%d')"
           git push
 
 # - name: Exposed file name for another job
